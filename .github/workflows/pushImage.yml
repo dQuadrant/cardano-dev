@@ -1,0 +1,42 @@
+name: pushImage
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push [Dev image]
+        uses: docker/build-push-action@v3
+        with:
+          file: dev.Dockerfile
+          context: .
+          push: true
+          tags: dquadrant/cardano-dev:latest
+      -
+        name: Build and push [Build image]
+        uses: docker/build-push-action@v3
+        with:
+          file: build.Dockerfile
+          context: .
+          push: true
+          tags: dquadrant/cardano-dev:latest
