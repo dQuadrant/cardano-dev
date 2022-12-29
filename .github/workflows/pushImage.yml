@@ -31,15 +31,15 @@ jobs:
         with:
           file: build.Dockerfile
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
-          tags: dquadrant/cardano-ci:latest
+          tags: dquadrant/cardano-ci:amd64
       -
         name: Build and push
         uses: docker/build-push-action@v3
         with:
           file: dev.Dockerfile
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
-          tags: dquadrant/cardano-dev:latest
+          tags: dquadrant/cardano-dev:amd64
