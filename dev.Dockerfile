@@ -14,6 +14,7 @@ RUN apt-get update -y && apt-get install -y \
   libicu-dev \
   libffi-dev \
   libgmp-dev \
+  liblzma-dev \
   libncursesw5 \
   libpq-dev \
   libssl-dev \
